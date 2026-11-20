@@ -1,0 +1,4 @@
+project_id      = "mglaesle-sandbox"
+region          = "us-central1"
+service_name    = "team-retrospective-agent"
+container_image = "us-central1-docker.pkg.dev/mglaesle-sandbox/agents/team-retrospective-agent:latest"

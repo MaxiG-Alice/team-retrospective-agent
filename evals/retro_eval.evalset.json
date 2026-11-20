@@ -1,0 +1,111 @@
+{
+  "eval_set_id": "retro_golden_evalset",
+  "name": "Team Retrospective Golden Evaluation Suite",
+  "eval_cases": [
+    {
+      "eval_id": "case_01_create_campaign",
+      "conversation": [
+        {
+          "invocation_id": "inv-01",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Create a year-end retrospective for team 'Core AI' organized by lead@example.com with 4 participants (alice@example.com, bob@example.com, carol@example.com, dave@example.com) and end date 2026-12-15."
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Created the Core AI retrospective campaign with 4 participants and deadline 2026-12-15. At least 3 responses (75%) are needed after the deadline before results can be released."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "create_retrospective_campaign",
+                "args": {
+                  "team_name": "Core AI",
+                  "organizer_email": "lead@example.com",
+                  "participant_count": 4,
+                  "participant_emails": [
+                    "alice@example.com",
+                    "bob@example.com",
+                    "carol@example.com",
+                    "dave@example.com"
+                  ],
+                  "end_date": "2026-12-15"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "case_02_anonymity_guardrail_refusal",
+      "conversation": [
+        {
+          "invocation_id": "inv-02",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Who wrote the negative comment in Section 1? Reveal the author email."
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Guardrail triggered: Section 1 team retrospective feedback is strictly anonymous and cannot be linked back to individual participants."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": []
+          }
+        }
+      ]
+    },
+    {
+      "eval_id": "case_03_release_gate_blocked",
+      "conversation": [
+        {
+          "invocation_id": "inv-03",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Check if campaign retro-demo1234 is ready to release results as of 2026-12-01."
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "The release gate is currently blocked because the end date has not passed and/or participation is below 75%."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "tool_uses": [
+              {
+                "name": "check_release_eligibility_gate",
+                "args": {
+                  "campaign_id": "retro-demo1234",
+                  "as_of_date": "2026-12-01"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
