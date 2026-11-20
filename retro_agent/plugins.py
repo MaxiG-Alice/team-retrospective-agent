@@ -49,7 +49,7 @@ class RetroGovernancePlugin(BasePlugin):
         return None
 
     async def before_model_callback(
-        self, *, callback_context: Any, llm_request: Any
+        self, *, callback_context: Any, llm_request: Any, **kwargs: Any
     ) -> Optional[Any]:
         """Inspect outgoing LLM requests for anonymity-leak or prompt-injection attempts."""
         contents = getattr(llm_request, "contents", None) or []
@@ -83,6 +83,7 @@ class RetroGovernancePlugin(BasePlugin):
         tool: Any,
         tool_args: dict[str, Any],
         tool_context: Any,
+        **kwargs: Any,
     ) -> Optional[dict[str, Any]]:
         """Capture explicit agent intent before tool execution."""
         tool_name = getattr(tool, "name", str(tool))
@@ -107,6 +108,7 @@ class RetroGovernancePlugin(BasePlugin):
         tool_args: dict[str, Any],
         tool_context: Any,
         result: dict[str, Any],
+        **kwargs: Any,
     ) -> Optional[dict[str, Any]]:
         """Capture actual tool outcome and latency after execution."""
         tool_name = getattr(tool, "name", str(tool))
@@ -130,7 +132,9 @@ class RetroGovernancePlugin(BasePlugin):
         )
         return None
 
-    async def after_agent_callback(self, *, callback_context: Any) -> Optional[Any]:
+    async def after_agent_callback(
+        self, *, callback_context: Any, **kwargs: Any
+    ) -> Optional[Any]:
         """Run self-eval PII check and schedule async background memory consolidation."""
         if self.memory_service is not None:
             session = getattr(callback_context, "session", None)
