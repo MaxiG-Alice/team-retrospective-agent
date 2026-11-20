@@ -12,8 +12,8 @@ from typing import Optional
 class ModelRoutingConfig:
     """Routes agent roles to the most appropriate Gemini model tier."""
 
-    coordinator_model: str = os.getenv("RETRO_PRO_MODEL", "gemini-2.5-pro")
-    reasoning_model: str = os.getenv("RETRO_PRO_MODEL", "gemini-2.5-pro")
+    coordinator_model: str = os.getenv("RETRO_PRO_MODEL", "gemini-3.1-pro-preview")
+    reasoning_model: str = os.getenv("RETRO_PRO_MODEL", "gemini-3.1-pro-preview")
     fast_model: str = os.getenv("RETRO_FLASH_MODEL", "gemini-2.5-flash")
     summarizer_model: str = os.getenv("RETRO_FLASH_MODEL", "gemini-2.5-flash")
 
