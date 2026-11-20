@@ -14,8 +14,8 @@ class ModelRoutingConfig:
 
     coordinator_model: str = os.getenv("RETRO_PRO_MODEL", "gemini-3.1-pro-preview")
     reasoning_model: str = os.getenv("RETRO_PRO_MODEL", "gemini-3.1-pro-preview")
-    fast_model: str = os.getenv("RETRO_FLASH_MODEL", "gemini-2.5-flash")
-    summarizer_model: str = os.getenv("RETRO_FLASH_MODEL", "gemini-2.5-flash")
+    fast_model: str = os.getenv("RETRO_FLASH_MODEL", "gemini-3.8-flash")
+    summarizer_model: str = os.getenv("RETRO_FLASH_MODEL", "gemini-3.8-flash")
 
 
 @dataclass(frozen=True)
